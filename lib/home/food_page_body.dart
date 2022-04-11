@@ -39,6 +39,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        //======== Slider Section ===============//
         SizedBox(
           height: Dimensions.pageView,
           child: PageView.builder(
@@ -48,6 +49,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 return _buildPageItem(position);
               }),
         ),
+
+        //======== Dots Section ===============//
         DotsIndicator(
           dotsCount: 5,
           position: _currentPageValue,
@@ -57,6 +60,103 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             activeSize: const Size(18.0, 9.0),
             activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(Dimensions.len5)),
+          ),
+        ),
+
+        //======== Popular text Section ===============//
+        SizedBox(height: Dimensions.len30),
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.wit30),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(text: "Popular"),
+              SizedBox(width: Dimensions.len10),
+              Container(
+                  margin: const EdgeInsets.only(bottom: 3),
+                  child: BigText(text: ".", color: Colors.black26)),
+              SizedBox(width: Dimensions.len10),
+              Container(
+                  margin: const EdgeInsets.only(bottom: 2),
+                  child: SmallText(text: "Food pairing")),
+            ],
+          ),
+        ),
+
+        //======== ListView for food and images Section ===============//
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 10,
+          itemBuilder: (context, index) => Container(
+            margin: EdgeInsets.only(
+              left: Dimensions.len20,
+              right: Dimensions.len20,
+              bottom: Dimensions.len10,
+            ),
+            child: Row(
+              children: [
+                //========= image container =============/
+                Container(
+                  width: Dimensions.listViewImgSize,
+                  height: Dimensions.listViewImgSize,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.len20),
+                    image: const DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage("assets/image/food0.png"),
+                    ),
+                  ),
+                ),
+
+                //========= image container =============/
+                Expanded(
+                  child: Container(
+                    height: Dimensions.listViewTextContainer,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(Dimensions.len20),
+                        bottomRight: Radius.circular(Dimensions.len20),
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: Dimensions.len10,
+                        right: Dimensions.len10,
+                        top: Dimensions.len10,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          BigText(text: "Nutritional Food Meal In China"),
+                          SizedBox(height: Dimensions.len10),
+                          SmallText(text: "With Chinese characteristics"),
+                          SizedBox(height: Dimensions.len10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              IconAndTextWidget(
+                                  icon: Icons.circle_sharp,
+                                  iconColor: AppColors.iconColor1,
+                                  text: "Normal"),
+                              IconAndTextWidget(
+                                  icon: Icons.location_on,
+                                  iconColor: AppColors.mainColor,
+                                  text: "17km"),
+                              IconAndTextWidget(
+                                  icon: Icons.access_time_rounded,
+                                  iconColor: AppColors.iconColor2,
+                                  text: "32min"),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ],
