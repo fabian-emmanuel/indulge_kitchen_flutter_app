@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:indulge_kitchen/data/controllers/popular_product_controller.dart';
+import 'package:indulge_kitchen/data/controllers/recommended_product_controller.dart';
+import 'package:indulge_kitchen/routes/routes_helper.dart';
 import 'package:indulge_kitchen/screens/home/main_food_page.dart';
 
 import 'helper/dependencies.dart' as dep;
@@ -17,13 +19,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Indulge Kitchen',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: const MainFoodPage(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
     );
   }
 }

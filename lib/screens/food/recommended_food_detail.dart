@@ -1,26 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:indulge_kitchen/data/controllers/recommended_product_controller.dart';
+import 'package:indulge_kitchen/routes/routes_helper.dart';
+import 'package:indulge_kitchen/utils/app_constants.dart';
 import 'package:indulge_kitchen/utils/colors.dart';
-import 'package:indulge_kitchen/utils/constants.dart';
 import 'package:indulge_kitchen/utils/dimensions.dart';
 import 'package:indulge_kitchen/widgets/app_icon.dart';
 import 'package:indulge_kitchen/widgets/big_text.dart';
 import 'package:indulge_kitchen/widgets/expandable_text.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+  final int pageId;
+  const RecommendedFoodDetail({Key? key, required this.pageId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 75,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.getInitial());
+                  },
+                  child: AppIcon(
+                    icon: Icons.clear,
+                  ),
+                ),
                 AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
@@ -28,7 +43,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                 child: Container(
                   child: Center(
                     child: BigText(
-                      text: "Sliver App Bar",
+                      text: product.name!,
                       size: Dimensions.len26,
                     ),
                   ),
@@ -48,8 +63,8 @@ class RecommendedFoodDetail extends StatelessWidget {
             backgroundColor: AppColors.yellowColor,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/image/food0.png",
+              background: Image.network(
+                AppConstants.BASE_URL + AppConstants.UPLOADS_URI + product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -63,7 +78,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                       left: Dimensions.len20,
                       right: Dimensions.len20,
                       bottom: Dimensions.len20),
-                  child: ExpandableTextWidget(text: Constants.dummyTextLong),
+                  child: ExpandableTextWidget(text: product.description!),
                 ),
               ],
             ),
@@ -90,7 +105,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   iconSize: Dimensions.len24,
                 ),
                 BigText(
-                  text: "\$12.88 X 0",
+                  text: "\$${product.price!} X 0",
                   color: AppColors.mainBlackColor,
                   size: Dimensions.len26,
                 ),
@@ -149,7 +164,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                       color: AppColors.mainColor,
                     ),
                     child: BigText(
-                      text: "\$10 | Add to Cart",
+                      text: "\$${product.price} | Add to Cart",
                       color: Colors.white,
                     )),
               ],
