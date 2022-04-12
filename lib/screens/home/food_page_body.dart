@@ -1,5 +1,9 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:indulge_kitchen/data/controllers/popular_product_controller.dart';
+import 'package:indulge_kitchen/data/models/products_model.dart';
+import 'package:indulge_kitchen/utils/app_constants.dart';
 import 'package:indulge_kitchen/utils/colors.dart';
 import 'package:indulge_kitchen/utils/dimensions.dart';
 import 'package:indulge_kitchen/widgets/app_column.dart';
@@ -41,28 +45,35 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         //======== Slider Section ===============//
-        SizedBox(
-          height: Dimensions.pageView,
-          child: PageView.builder(
-              controller: pageController,
-              itemCount: 5,
-              itemBuilder: (context, position) {
-                return _buildPageItem(position);
-              }),
-        ),
+        GetBuilder<PopularProductController>(builder: (products) {
+          return SizedBox(
+            height: Dimensions.pageView,
+            child: PageView.builder(
+                controller: pageController,
+                itemCount: products.popularProductList.length,
+                itemBuilder: (context, position) {
+                  return _buildPageItem(
+                      position, products.popularProductList[position]);
+                }),
+          );
+        }),
 
         //======== Dots Section ===============//
-        DotsIndicator(
-          dotsCount: 5,
-          position: _currentPageValue,
-          decorator: DotsDecorator(
-            activeColor: AppColors.mainColor,
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(Dimensions.len5)),
-          ),
-        ),
+        GetBuilder<PopularProductController>(builder: (products) {
+          return DotsIndicator(
+            dotsCount: products.popularProductList.isEmpty
+                ? 1
+                : products.popularProductList.length,
+            position: _currentPageValue,
+            decorator: DotsDecorator(
+              activeColor: AppColors.mainColor,
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Dimensions.len5)),
+            ),
+          );
+        }),
 
         //======== Popular text Section ===============//
         SizedBox(height: Dimensions.len30),
@@ -164,7 +175,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, ProductModel popularProductList) {
     Matrix4 matrix = Matrix4.identity();
     if (index == _currentPageValue.floor()) {
       var currentScale = 1 - (_currentPageValue - index) * (1 - _scaleFactor);
@@ -206,9 +217,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 color: index.isEven
                     ? const Color(0xFF69c5df)
                     : const Color(0xff4bde6c),
-                image: const DecorationImage(
+                image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage("assets/image/food0.png"))),
+                    image: NetworkImage(AppConstants.BASE_URL +
+                        "/uploads/" +
+                        popularProductList.img!))),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -245,8 +258,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   left: Dimensions.len15,
                   right: Dimensions.len15,
                 ),
-                child: const AppColumn(
-                  text: "Chinese Side",
+                child: AppColumn(
+                  text: popularProductList.name!,
                 ),
               ),
             ),
