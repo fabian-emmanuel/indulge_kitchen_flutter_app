@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:indulge_kitchen/utils/colors.dart';
+import 'package:indulge_kitchen/utils/constants.dart';
 import 'package:indulge_kitchen/utils/dimensions.dart';
 import 'package:indulge_kitchen/widgets/app_column.dart';
 import 'package:indulge_kitchen/widgets/app_icon.dart';
@@ -72,28 +73,10 @@ class PopularFoodDetail extends StatelessWidget {
                   BigText(text: "Introduce"),
                   SizedBox(height: Dimensions.len20),
                   //Expandable text widget
-                  const Expanded(
+                  Expanded(
                     child: SingleChildScrollView(
-                      child: ExpandableTextWidget(
-                          text:
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
-                              "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                              "Erat nam at lectus urna duis convallis convallis tellus. "
-                              "Varius duis at consectetur lorem donec. Quam elementum pulvinar "
-                              "etiam non quam lacus suspendisse faucibus interdum. Non blandit "
-                              "massa enim nec dui. Vitae et leo duis ut diam quam nulla porttitor massa."
-                              " Enim praesent elementum facilisis leo vel fringilla est. Lectus mauris "
-                              "ultrices eros in. Gravida quis blandit turpis cursus in hac "
-                              "habitasse platea dictumst. Elementum eu facilisis sed odio morbi quis "
-                              "commodo odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
-                              "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                              "Erat nam at lectus urna duis convallis convallis tellus. Varius duis "
-                              "at consectetur lorem donec. Quam elementum pulvinar etiam non quam lacus "
-                              "suspendisse faucibus interdum. Non blandit massa enim nec dui. "
-                              "Vitae et leo duis ut diam quam nulla porttitor massa. Enim praesent "
-                              "elementum facilisis leo vel fringilla est. Lectus mauris ultrices eros in. "
-                              "Gravida quis blandit turpis cursus in hac habitasse platea dictumst. "
-                              "Elementum eu facilisis sed odio morbi quis commodo odio."),
+                      child:
+                          ExpandableTextWidget(text: Constants.dummyTextShort),
                     ),
                   ),
                 ],
