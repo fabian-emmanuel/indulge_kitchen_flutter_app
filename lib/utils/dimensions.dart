@@ -14,8 +14,10 @@ class Dimensions {
   static double len5 = screenHeight / 168.8;
   static double len10 = screenHeight / 84.4;
   static double len15 = screenHeight / 56.27;
+  static double len16 = screenHeight / 52.75;
   static double len20 = screenHeight / 42.2;
   static double len24 = screenHeight / 35.17;
+  static double len26 = screenHeight / 32.46;
   static double len30 = screenHeight / 28.13;
   static double len45 = screenHeight / 18.76;
 
@@ -26,4 +28,7 @@ class Dimensions {
   static double wit24 = screenWidth / 16.25;
   static double wit30 = screenWidth / 13.0;
   static double wit45 = screenWidth / 8.67;
+
+  static double popularFoodImgSize = screenHeight / 2.41;
+  static double bottomHeightBar = screenHeight / 7.03;
 }
