@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:indulge_kitchen/data/controllers/popular_product_controller.dart';
 import 'package:indulge_kitchen/data/controllers/recommended_product_controller.dart';
 import 'package:indulge_kitchen/routes/routes_helper.dart';
-import 'package:indulge_kitchen/screens/home/main_food_page.dart';
 
 import 'helper/dependencies.dart' as dep;
 
@@ -23,8 +22,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Indulge Kitchen',
-      home: const MainFoodPage(),
-      initialRoute: RouteHelper.initial,
+      initialRoute: RouteHelper.getInitial(),
       getPages: RouteHelper.routes,
     );
   }

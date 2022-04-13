@@ -13,7 +13,9 @@ import 'package:indulge_kitchen/widgets/expandable_text.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
   final int pageId;
-  const RecommendedFoodDetail({Key? key, required this.pageId})
+  final String page;
+  const RecommendedFoodDetail(
+      {Key? key, required this.pageId, required this.page})
       : super(key: key);
 
   @override
@@ -34,7 +36,9 @@ class RecommendedFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(RouteHelper.getInitial());
+                    (page == 'cartpage')
+                        ? Get.toNamed(RouteHelper.getCartPage(pageId))
+                        : Get.toNamed(RouteHelper.getInitial());
                   },
                   child: AppIcon(
                     icon: Icons.clear,
@@ -44,32 +48,39 @@ class RecommendedFoodDetail extends StatelessWidget {
                 GetBuilder<PopularProductController>(builder: (controller) {
                   var totalItems =
                       Get.find<PopularProductController>().totalItems;
-                  return Stack(
-                    children: [
-                      AppIcon(icon: Icons.shopping_cart_outlined),
-                      totalItems > 0
-                          ? Positioned(
-                              top: 0,
-                              right: 0,
-                              child: AppIcon(
-                                icon: Icons.circle,
-                                size: Dimensions.len20,
-                                iconColor: Colors.transparent,
-                                bgColor: AppColors.mainColor,
-                              ),
-                            )
-                          : Container(),
-                      totalItems > 0
-                          ? Positioned(
-                              top: 3,
-                              right: 4,
-                              child: BigText(
-                                text: totalItems.toString(),
-                                size: 12,
-                                color: Colors.white,
-                              ))
-                          : Container()
-                    ],
+                  return GestureDetector(
+                    onTap: () {
+                      if (totalItems > 0) {
+                        Get.toNamed(RouteHelper.getCartPage(pageId));
+                      }
+                    },
+                    child: Stack(
+                      children: [
+                        AppIcon(icon: Icons.shopping_cart_outlined),
+                        totalItems > 0
+                            ? Positioned(
+                                top: 0,
+                                right: 0,
+                                child: AppIcon(
+                                  icon: Icons.circle,
+                                  size: Dimensions.len20,
+                                  iconColor: Colors.transparent,
+                                  bgColor: AppColors.mainColor,
+                                ),
+                              )
+                            : Container(),
+                        totalItems > 0
+                            ? Positioned(
+                                top: 3,
+                                right: 4,
+                                child: BigText(
+                                  text: totalItems.toString(),
+                                  size: 12,
+                                  color: Colors.white,
+                                ))
+                            : Container()
+                      ],
+                    ),
                   );
                 }),
               ],

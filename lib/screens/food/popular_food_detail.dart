@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:indulge_kitchen/data/controllers/cart_controller.dart';
 import 'package:indulge_kitchen/data/controllers/popular_product_controller.dart';
-import 'package:indulge_kitchen/screens/home/main_food_page.dart';
+import 'package:indulge_kitchen/routes/routes_helper.dart';
 import 'package:indulge_kitchen/utils/app_constants.dart';
 import 'package:indulge_kitchen/utils/colors.dart';
 import 'package:indulge_kitchen/utils/dimensions.dart';
@@ -13,7 +13,9 @@ import 'package:indulge_kitchen/widgets/expandable_text.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   final int pageId;
-  const PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
+  final String page;
+  const PopularFoodDetail({Key? key, required this.pageId, required this.page})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,6 @@ class PopularFoodDetail extends StatelessWidget {
         Get.find<PopularProductController>().popularProductList[pageId];
     Get.find<PopularProductController>()
         .initProduct(product, Get.find<CartController>());
-    // print("page id is " + pageId.toString());
-    // print("product name id is " + product.name.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -54,38 +54,46 @@ class PopularFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-                      Get.to(() => const MainFoodPage());
+                      (page == 'cartpage')
+                          ? Get.toNamed(RouteHelper.getCartPage(pageId))
+                          : Get.toNamed(RouteHelper.getInitial());
                     },
                     child: AppIcon(icon: Icons.arrow_back_ios)),
                 GetBuilder<PopularProductController>(builder: (controller) {
-                  var totalItems =
-                      Get.find<PopularProductController>().totalItems;
-                  return Stack(
-                    children: [
-                      AppIcon(icon: Icons.shopping_cart_outlined),
-                      totalItems > 0
-                          ? Positioned(
-                              top: 0,
-                              right: 0,
-                              child: AppIcon(
-                                icon: Icons.circle,
-                                size: Dimensions.len20,
-                                iconColor: Colors.transparent,
-                                bgColor: AppColors.mainColor,
-                              ),
-                            )
-                          : Container(),
-                      totalItems > 0
-                          ? Positioned(
-                              top: 3,
-                              right: 4,
-                              child: BigText(
-                                text: totalItems.toString(),
-                                size: 12,
-                                color: Colors.white,
-                              ))
-                          : Container()
-                    ],
+                  var totalItems = controller.totalItems;
+                  return GestureDetector(
+                    onTap: () {
+                      if (totalItems > 0) {
+                        Get.toNamed(RouteHelper.getCartPage(pageId));
+                      }
+                    },
+                    child: Stack(
+                      children: [
+                        AppIcon(icon: Icons.shopping_cart_outlined),
+                        totalItems > 0
+                            ? Positioned(
+                                top: 0,
+                                right: 0,
+                                child: AppIcon(
+                                  icon: Icons.circle,
+                                  size: Dimensions.len20,
+                                  iconColor: Colors.transparent,
+                                  bgColor: AppColors.mainColor,
+                                ),
+                              )
+                            : Container(),
+                        totalItems > 0
+                            ? Positioned(
+                                top: 3,
+                                right: 4,
+                                child: BigText(
+                                  text: totalItems.toString(),
+                                  size: 12,
+                                  color: Colors.white,
+                                ))
+                            : Container()
+                      ],
+                    ),
                   );
                 }),
               ],

@@ -26,11 +26,12 @@ class CartController extends GetxController {
           quantity: value.quantity! + quantity,
           isExist: true,
           time: DateTime.now().toString(),
+          product: product,
         );
       });
 
-      if (quantity <= 0) {
-        if (totalQuantity <= 0) {
+      if (quantity < 1) {
+        if (totalQuantity < 1) {
           _items.remove(product.id);
           Get.snackbar(
             "${product.name}",
@@ -38,14 +39,7 @@ class CartController extends GetxController {
             backgroundColor: AppColors.iconColor2,
             colorText: Colors.white,
           );
-          return;
         }
-        Get.snackbar(
-          "${quantity * -1} ${product.name}",
-          "Removed from Cart Successfully!",
-          backgroundColor: AppColors.iconColor2,
-          colorText: Colors.white,
-        );
       }
     } else {
       if (quantity > 0) {
@@ -59,6 +53,7 @@ class CartController extends GetxController {
                   quantity: quantity,
                   isExist: true,
                   time: DateTime.now().toString(),
+                  product: product,
                 ));
         Get.snackbar(
           "$quantity ${product.name}",
@@ -75,6 +70,7 @@ class CartController extends GetxController {
         );
       }
     }
+    update();
   }
 
   bool existInCart(ProductModel product) {
@@ -99,5 +95,17 @@ class CartController extends GetxController {
       totalItems += value.quantity!;
     });
     return totalItems;
+  }
+
+  List<CartModel> get getItems {
+    return _items.entries.map((e) => e.value).toList();
+  }
+
+  int get totalAmount {
+    var totalAmount = 0;
+    _items.forEach((key, value) {
+      totalAmount += value.price! * value.quantity!;
+    });
+    return totalAmount;
   }
 }
