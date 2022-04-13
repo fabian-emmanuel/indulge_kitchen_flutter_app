@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:indulge_kitchen/screens/cart/cart_page.dart';
 import 'package:indulge_kitchen/screens/food/popular_food_detail.dart';
 import 'package:indulge_kitchen/screens/food/recommended_food_detail.dart';
-import 'package:indulge_kitchen/screens/home/main_food_page.dart';
+import 'package:indulge_kitchen/screens/home/home_page.dart';
 
 class RouteHelper {
   static const String initial = "/";
@@ -20,7 +20,7 @@ class RouteHelper {
   static List<GetPage> routes = [
     GetPage(
       name: initial,
-      page: () => const MainFoodPage(),
+      page: () => const HomePage(),
     ),
     GetPage(
       name: popularFood,
