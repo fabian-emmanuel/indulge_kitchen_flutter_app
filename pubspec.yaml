@@ -33,6 +33,7 @@ dependencies:
   dots_indicator: ^2.1.0
   get: ^4.6.1
   persistent_bottom_nav_bar: ^4.0.2
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:
