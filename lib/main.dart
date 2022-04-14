@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:indulge_kitchen/data/controllers/cart_controller.dart';
 import 'package:indulge_kitchen/data/controllers/popular_product_controller.dart';
 import 'package:indulge_kitchen/data/controllers/recommended_product_controller.dart';
 import 'package:indulge_kitchen/routes/routes_helper.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<CartController>().getCartData();
     return GetBuilder<PopularProductController>(builder: (_) {
       return GetBuilder<RecommendedProductController>(builder: (_) {
         return GetMaterialApp(

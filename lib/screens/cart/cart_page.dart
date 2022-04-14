@@ -250,7 +250,9 @@ class CartPage extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  controller.addToHistory();
+                },
                 child: Container(
                     padding: EdgeInsets.only(
                       left: Dimensions.wit20,

@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:indulge_kitchen/data/controllers/popular_product_controller.dart';
 import 'package:indulge_kitchen/data/controllers/recommended_product_controller.dart';
 import 'package:indulge_kitchen/routes/routes_helper.dart';
