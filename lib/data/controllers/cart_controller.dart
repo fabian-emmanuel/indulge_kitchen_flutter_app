@@ -119,7 +119,7 @@ class CartController extends GetxController {
 
   set setCart(List<CartModel> items) {
     storageItems = items;
-    print('length of cart items ${storageItems.length}');
+    // print('length of cart items ${storageItems.length}');
     for (int i = 0; i < storageItems.length; i++) {
       _items.putIfAbsent(storageItems[i].product!.id!, () => storageItems[i]);
     }
@@ -135,7 +135,7 @@ class CartController extends GetxController {
     update();
   }
 
-  List<CartModel> getCartHistoryList(){
+  List<CartModel> getCartHistoryList() {
     return cartRepo.getCartHistoryList();
   }
 }

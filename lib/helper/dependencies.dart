@@ -10,8 +10,9 @@ import 'package:indulge_kitchen/utils/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> init() async {
-  final prefs = await SharedPreferences.getInstance();
-  Get.lazyPut(() => prefs);
+  final preferences = await SharedPreferences.getInstance();
+
+  Get.lazyPut(() => preferences);
   //clients
   Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.BASE_URL));
 
