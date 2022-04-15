@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:indulge_kitchen/screens/home/food_page_body.dart';
 import 'package:indulge_kitchen/utils/colors.dart';
@@ -19,48 +20,46 @@ class _MainFoodPageState extends State<MainFoodPage> {
         body: Column(
       children: [
         Container(
-          child: Container(
-            margin: EdgeInsets.only(
-                top: Dimensions.len45, bottom: Dimensions.len15),
-            padding: EdgeInsets.only(
-                left: Dimensions.len20, right: Dimensions.len20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    BigText(
-                      text: "Nigeria",
-                      color: AppColors.mainColor,
-                    ),
-                    Row(
-                      children: [
-                        SmallText(
-                          text: "Lagos",
-                          color: Colors.black54,
-                        ),
-                        const Icon(Icons.arrow_drop_down_rounded),
-                      ],
-                    )
-                  ],
-                ),
-                Center(
-                  child: Container(
-                    width: Dimensions.len45,
-                    height: Dimensions.len45,
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                      size: Dimensions.len24,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.len15),
-                      color: AppColors.mainColor,
-                    ),
+          margin:
+              EdgeInsets.only(top: Dimensions.len45, bottom: Dimensions.len15),
+          padding:
+              EdgeInsets.only(left: Dimensions.len20, right: Dimensions.len20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  BigText(
+                    text: "Nigeria",
+                    color: AppColors.mainColor,
                   ),
-                )
-              ],
-            ),
+                  Row(
+                    children: [
+                      SmallText(
+                        text: "Lagos",
+                        color: Colors.black54,
+                      ),
+                      const Icon(Icons.arrow_drop_down_rounded),
+                    ],
+                  )
+                ],
+              ),
+              Center(
+                child: Container(
+                  width: Dimensions.len45,
+                  height: Dimensions.len45,
+                  child: Icon(
+                    CupertinoIcons.search,
+                    color: Colors.white,
+                    size: Dimensions.len24,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.len15),
+                    color: AppColors.mainColor,
+                  ),
+                ),
+              )
+            ],
           ),
         ),
         const Expanded(

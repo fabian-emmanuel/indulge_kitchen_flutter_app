@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:indulge_kitchen/data/controllers/cart_controller.dart';
@@ -69,7 +70,7 @@ class PopularFoodDetail extends StatelessWidget {
                     },
                     child: Stack(
                       children: [
-                        AppIcon(icon: Icons.shopping_cart_outlined),
+                        AppIcon(icon: CupertinoIcons.cart),
                         totalItems > 0
                             ? Positioned(
                                 top: 0,

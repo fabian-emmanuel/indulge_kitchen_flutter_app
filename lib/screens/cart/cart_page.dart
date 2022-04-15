@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:indulge_kitchen/data/controllers/cart_controller.dart';
@@ -50,7 +51,7 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
                 AppIcon(
-                  icon: Icons.shopping_cart_outlined,
+                  icon: CupertinoIcons.cart,
                   iconSize: Dimensions.len24,
                   iconColor: Colors.white,
                   bgColor: AppColors.mainColor,
