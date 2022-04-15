@@ -16,9 +16,14 @@ class CartRepo {
   final _cartList = AppConstants.CART_LIST;
 
   void addToCartList(List<CartModel> cartItems) {
+    // preferences.remove(_cartList);
+    // preferences.remove(_cartHistoryList);
+
+    var time = DateTime.now();
     cart = [];
 
     cartItems.forEach((element) {
+      element.time = '$time';
       cart.add(jsonEncode(element));
     });
     preferences.setStringList(_cartList, cart);
@@ -56,7 +61,7 @@ class CartRepo {
 
   List<CartModel> getCartHistoryList() {
     if (preferences.containsKey(_cartHistoryList)) {
-      cartHistory = [];
+      // cartHistory = [];
       cartHistory = preferences.getStringList(_cartHistoryList)!;
     }
     List<CartModel> cartHistoryList = [];

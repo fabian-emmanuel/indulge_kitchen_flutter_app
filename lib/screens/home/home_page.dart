@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:indulge_kitchen/screens/cart/cart_history.dart';
 import 'package:indulge_kitchen/screens/home/main_food_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     return [
       MainFoodPage(),
       Container(child: Center(child: Text("Next Page"))),
-      Container(child: Center(child: Text("Next Next Page"))),
+      CartHistory(),
       Container(child: Center(child: Text("Next Next Next Page"))),
     ];
   }
