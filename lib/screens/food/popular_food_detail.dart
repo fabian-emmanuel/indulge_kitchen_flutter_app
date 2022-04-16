@@ -17,6 +17,7 @@ class PopularFoodDetail extends StatelessWidget {
   final String page;
   const PopularFoodDetail({Key? key, required this.pageId, required this.page})
       : super(key: key);
+  final _cartPage = AppConstants.CART_PAGE;
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +56,8 @@ class PopularFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-                      (page == 'cartpage')
-                          ? Get.toNamed(RouteHelper.getCartPage(pageId))
+                      (page == _cartPage)
+                          ? Get.toNamed(RouteHelper.getCartPage())
                           : Get.toNamed(RouteHelper.getInitial());
                     },
                     child: AppIcon(icon: Icons.arrow_back_ios)),
@@ -65,7 +66,7 @@ class PopularFoodDetail extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       if (totalItems > 0) {
-                        Get.toNamed(RouteHelper.getCartPage(pageId));
+                        Get.toNamed(RouteHelper.getCartPage());
                       }
                     },
                     child: Stack(

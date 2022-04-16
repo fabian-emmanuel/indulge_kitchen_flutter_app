@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:indulge_kitchen/data/controllers/cart_controller.dart';
+import 'package:indulge_kitchen/data/models/cart_model.dart';
+import 'package:indulge_kitchen/routes/routes_helper.dart';
 import 'package:indulge_kitchen/utils/app_constants.dart';
 import 'package:indulge_kitchen/utils/colors.dart';
 import 'package:indulge_kitchen/utils/dimensions.dart';
@@ -28,11 +32,15 @@ class CartHistory extends StatelessWidget {
       }
     }
 
-    List<int> cartOrderTimeToList() {
+    List<int> cartItemsPerOrderToList() {
       return cartItemsPerOrder.entries.map((e) => e.value).toList();
     }
 
-    List<int> itemsPerOrder = cartOrderTimeToList();
+    List<String> cartOrderTimeToList() {
+      return cartItemsPerOrder.entries.map((e) => e.key).toList();
+    }
+
+    List<int> itemsPerOrder = cartItemsPerOrderToList();
 
     var listCounter = 0;
 
@@ -141,20 +149,46 @@ class CartHistory extends StatelessWidget {
                                               : '${itemsPerOrder[i]} Item',
                                           color: AppColors.titleColor,
                                           size: Dimensions.len16),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: Dimensions.wit15,
-                                            vertical: Dimensions.len5),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: AppColors.mainColor,
-                                                width: 1.0,
-                                                style: BorderStyle.solid),
-                                            borderRadius: BorderRadius.circular(
-                                                Dimensions.len5)),
-                                        child: SmallText(
-                                            text: 'Add more...',
-                                            color: AppColors.mainColor),
+                                      GestureDetector(
+                                        onTap: () {
+                                          var orderTime = cartOrderTimeToList();
+                                          Map<int, CartModel> addMore = {};
+                                          for (int j = 0;
+                                              j < getCartHistoryList.length;
+                                              j++) {
+                                            if (getCartHistoryList[j].time ==
+                                                orderTime[i]) {
+                                              addMore.putIfAbsent(
+                                                  getCartHistoryList[j].id!,
+                                                  () => CartModel.fromJson(
+                                                      jsonDecode(jsonEncode(
+                                                          getCartHistoryList[
+                                                              j]))));
+                                            }
+                                          }
+                                          Get.find<CartController>().setItems =
+                                              addMore;
+                                          Get.find<CartController>()
+                                              .addToCartList();
+                                          Get.toNamed(
+                                              RouteHelper.getCartPage());
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: Dimensions.wit15,
+                                              vertical: Dimensions.len5),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: AppColors.mainColor,
+                                                  width: 1.0,
+                                                  style: BorderStyle.solid),
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      Dimensions.len5)),
+                                          child: SmallText(
+                                              text: 'Add more...',
+                                              color: AppColors.mainColor),
+                                        ),
                                       )
                                     ],
                                   ),

@@ -13,13 +13,10 @@ import 'package:indulge_kitchen/widgets/big_text.dart';
 import 'package:indulge_kitchen/widgets/small_text.dart';
 
 class CartPage extends StatelessWidget {
-  final int pageId;
-  const CartPage({Key? key, required this.pageId}) : super(key: key);
-
+  const CartPage({Key? key}) : super(key: key);
+  final String _cartPage = AppConstants.CART_PAGE;
   @override
   Widget build(BuildContext context) {
-    var product =
-        Get.find<PopularProductController>().popularProductList[pageId];
     return Scaffold(
       body: Stack(
         children: [
@@ -95,13 +92,24 @@ class CartPage extends StatelessWidget {
                                       ? {
                                           Get.toNamed(
                                               RouteHelper.getPopularFood(
-                                                  popularIndex, 'cartpage'))
+                                                  popularIndex, _cartPage))
                                         }
-                                      : {
-                                          Get.toNamed(
-                                              RouteHelper.getRecommendedFood(
-                                                  recommendedIndex, 'cartpage'))
-                                        };
+                                      : (recommendedIndex < 0)
+                                          ? {
+                                              Get.snackbar(
+                                                "History Product",
+                                                "Product review not available for history items!",
+                                                backgroundColor:
+                                                    AppColors.mainColor,
+                                                colorText: Colors.white,
+                                              )
+                                            }
+                                          : {
+                                              Get.toNamed(RouteHelper
+                                                  .getRecommendedFood(
+                                                      recommendedIndex,
+                                                      _cartPage))
+                                            };
                                 },
                                 child: Container(
                                   height: Dimensions.len20 * 5,
