@@ -48,15 +48,10 @@ class CartRepo {
     }
 
     for (int i = 0; i < cart.length; i++) {
-      print('history list ${cart[i]}');
       cartHistory.add(cart[i]);
     }
     removeCart();
     preferences.setStringList(_cartHistoryList, cartHistory);
-    print('lenght of history list is ${getCartHistoryList().length}');
-    for (int j = 0; j < getCartHistoryList().length; j++) {
-      print('time of order is ${getCartHistoryList()[j].time}');
-    }
   }
 
   void removeCart() {
@@ -73,5 +68,11 @@ class CartRepo {
     cartHistory.forEach((element) =>
         cartHistoryList.add(CartModel.fromJson(jsonDecode(element))));
     return cartHistoryList;
+  }
+
+  void clearCartHistory() {
+    //TODO
+    // preferences.remove(_cartList);
+    // preferences.remove(_cartHistoryList);
   }
 }
