@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:indulge_kitchen/screens/auth/sign_in_page.dart';
+import 'package:indulge_kitchen/screens/auth/sign_up_page.dart';
 import 'package:indulge_kitchen/screens/cart/cart_page.dart';
 import 'package:indulge_kitchen/screens/food/popular_food_detail.dart';
 import 'package:indulge_kitchen/screens/food/recommended_food_detail.dart';
@@ -11,6 +13,8 @@ class RouteHelper {
   static const String popularFood = "/popular-food";
   static const String recommendedFood = "/recommended-food";
   static const String cartPage = "/cart-page";
+  static const String signUpPage = "/sign-up";
+  static const String signInPage = "/sign-in";
 
   static String getSplashScreen() => '$splashScreen';
   static String getInitial() => '$initial';
@@ -19,6 +23,8 @@ class RouteHelper {
   static String getRecommendedFood(int pageId, String page) =>
       '$recommendedFood?pageId=$pageId&page=$page';
   static String getCartPage() => '$cartPage';
+  static String getSingUpPage() => '$signUpPage';
+  static String getSignInPage() => '$signInPage';
 
   static List<GetPage> routes = [
     GetPage(
@@ -51,6 +57,14 @@ class RouteHelper {
       name: cartPage,
       page: () => const CartPage(),
       transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: signUpPage,
+      page: () => const SignUpPage(),
+    ),
+    GetPage(
+      name: signInPage,
+      page: () => const SignInPage(),
     ),
   ];
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:indulge_kitchen/screens/account/account_page.dart';
+import 'package:indulge_kitchen/screens/auth/sign_up_page.dart';
 import 'package:indulge_kitchen/screens/cart/cart_history.dart';
 import 'package:indulge_kitchen/screens/home/main_food_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       MainFoodPage(),
-      Container(child: Center(child: Text("Next Page"))),
+      SignUpPage(),
       CartHistory(),
       AccountPage(),
     ];

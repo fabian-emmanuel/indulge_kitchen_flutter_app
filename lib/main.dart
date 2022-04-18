@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Indulge Kitchen',
-          // home: const SplashScreen(),
+          // home: const SignInPage(),
           initialRoute: RouteHelper.getSplashScreen(),
           getPages: RouteHelper.routes,
         );
