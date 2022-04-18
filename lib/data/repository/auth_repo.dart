@@ -40,4 +40,17 @@ class AuthRepo {
   Future<String> getUserToken() async {
     return await preferences.getString(AppConstants.TOKEN) ?? "None";
   }
+
+  bool isUserLoggedIn() {
+    return preferences.containsKey(AppConstants.TOKEN);
+  }
+
+  bool clearSharedData() {
+    preferences.remove(AppConstants.TOKEN);
+    preferences.remove(AppConstants.PASSWORD);
+    preferences.remove(AppConstants.EMAIL);
+    apiClient.token = '';
+    apiClient.updateHeader('');
+    return true;
+  }
 }

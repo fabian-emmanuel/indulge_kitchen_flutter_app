@@ -12,7 +12,7 @@ class AppConstants {
   static const String REGISTRATION_URI = "/api/v1/auth/register";
   static const String LOGIN_URI = "/api/v1/auth/login";
 
-  static const String TOKEN = "DBToken";
+  static const String TOKEN = "";
   static const String EMAIL = "";
   static const String PASSWORD = "";
   static const String CART_LIST = "cart-list";

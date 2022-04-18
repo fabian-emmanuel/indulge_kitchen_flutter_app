@@ -71,8 +71,8 @@ class CartRepo {
   }
 
   void clearCartHistory() {
-    //TODO
-    // preferences.remove(_cartList);
-    // preferences.remove(_cartHistoryList);
+    removeCart();
+    cartHistory = [];
+    preferences.remove(_cartHistoryList);
   }
 }

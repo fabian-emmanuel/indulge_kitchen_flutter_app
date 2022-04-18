@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:indulge_kitchen/base/404_page.dart';
+import 'package:indulge_kitchen/data/controllers/auth_controller.dart';
 import 'package:indulge_kitchen/data/controllers/cart_controller.dart';
 import 'package:indulge_kitchen/data/controllers/popular_product_controller.dart';
 import 'package:indulge_kitchen/data/controllers/recommended_product_controller.dart';
@@ -290,7 +291,9 @@ class CartPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        controller.addToHistory();
+                        (Get.find<AuthController>().isUserLoggedIn())
+                            ? {controller.addToHistory()}
+                            : {Get.toNamed(RouteHelper.getSignInPage())};
                       },
                       child: Container(
                           padding: EdgeInsets.only(

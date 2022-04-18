@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:indulge_kitchen/data/controllers/auth_controller.dart';
+import 'package:indulge_kitchen/data/controllers/cart_controller.dart';
+import 'package:indulge_kitchen/routes/routes_helper.dart';
 import 'package:indulge_kitchen/utils/colors.dart';
 import 'package:indulge_kitchen/utils/dimensions.dart';
 import 'package:indulge_kitchen/widgets/account_widget.dart';
@@ -23,7 +27,7 @@ class AccountPage extends StatelessWidget {
       body: Container(
         width: double.maxFinite,
         margin:
-            EdgeInsets.only(top: Dimensions.len20, bottom: Dimensions.len20),
+            EdgeInsets.only(top: Dimensions.len30, bottom: Dimensions.len30),
         child: Column(
           children: [
             AppIcon(
@@ -97,43 +101,31 @@ class AccountPage extends StatelessWidget {
                         bgColor: AppColors.mainColor,
                       ),
                       bigText: BigText(
-                        text: 'John Doe',
+                        text: 'Messages',
                       ),
                     ),
-                    AccountWidget(
-                      appIcon: AppIcon(
-                        icon: CupertinoIcons.person,
-                        iconSize: Dimensions.len30,
-                        size: Dimensions.len45,
-                        iconColor: Colors.white,
-                        bgColor: AppColors.mainColor,
-                      ),
-                      bigText: BigText(
-                        text: 'John Doe',
-                      ),
-                    ),
-                    AccountWidget(
-                      appIcon: AppIcon(
-                        icon: CupertinoIcons.person,
-                        iconSize: Dimensions.len30,
-                        size: Dimensions.len45,
-                        iconColor: Colors.white,
-                        bgColor: AppColors.mainColor,
-                      ),
-                      bigText: BigText(
-                        text: 'John Doe',
-                      ),
-                    ),
-                    AccountWidget(
-                      appIcon: AppIcon(
-                        icon: CupertinoIcons.person,
-                        iconSize: Dimensions.len30,
-                        size: Dimensions.len45,
-                        iconColor: Colors.white,
-                        bgColor: AppColors.mainColor,
-                      ),
-                      bigText: BigText(
-                        text: 'John Doe',
+                    GestureDetector(
+                      onTap: () {
+                        (Get.find<AuthController>().isUserLoggedIn())
+                            ? {
+                                Get.find<AuthController>().clearSharedData(),
+                                Get.find<CartController>().clear(),
+                                Get.find<CartController>().clearCartHistory(),
+                                Get.offNamed(RouteHelper.getSignInPage())
+                              }
+                            : {};
+                      },
+                      child: AccountWidget(
+                        appIcon: AppIcon(
+                          icon: Icons.logout,
+                          iconSize: Dimensions.len30,
+                          size: Dimensions.len45,
+                          iconColor: Colors.white,
+                          bgColor: Colors.redAccent,
+                        ),
+                        bigText: BigText(
+                          text: 'Log Out',
+                        ),
                       ),
                     ),
                   ],

@@ -48,4 +48,12 @@ class AuthController extends GetxController implements GetxService {
     update();
     return responseModel;
   }
+
+  bool isUserLoggedIn() {
+    return authRepo.isUserLoggedIn();
+  }
+
+  bool clearSharedData() {
+    return authRepo.clearSharedData();
+  }
 }
