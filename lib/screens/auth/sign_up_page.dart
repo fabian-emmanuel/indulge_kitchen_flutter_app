@@ -46,11 +46,10 @@ class SignUpPage extends StatelessWidget {
         SignUpModel model = SignUpModel(
             name: name, phone: phone, email: email, password: password);
         authController.registration(model).then((status) {
-          print(status.message);
           if (status.isSuccess) {
             showCustomSnackBar("Registration is Successful",
                 title: 'Perfect', bgColor: Colors.green);
-            Get.toNamed(RouteHelper.getSignInPage());
+            Get.toNamed(RouteHelper.getInitial());
           } else {
             showCustomSnackBar(status.message);
           }
@@ -73,8 +72,8 @@ class SignUpPage extends StatelessWidget {
                           child: CircleAvatar(
                             backgroundColor: Colors.white,
                             radius: Dimensions.len20 * 4,
-                            backgroundImage:
-                                AssetImage('assets/image/logo part 1.png'),
+                            backgroundImage: const AssetImage(
+                                'assets/image/logo part 1.png'),
                           ),
                         ),
                       ),
